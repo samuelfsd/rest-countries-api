@@ -1,5 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Switch from 'react-switch';
+import { ThemeContext } from 'styled-components';
 
-export function Header() {
-  return <h1>Header</h1>;
+import { Container, Content } from './styles';
+
+interface HeaderProps {
+  toggleTheme: () => void;
+}
+
+export function Header(props: HeaderProps) {
+  const { colors, title } = useContext(ThemeContext);
+  return (
+    <Container>
+      <Content>
+        <h3>Where in the World?</h3>
+
+        <Switch
+          onChange={props.toggleTheme}
+          checked={title === 'dark'}
+          chekedIcon={false}
+          uncheckedIcon={false}
+          height={10}
+          width={40}
+          handleDiameter={20}
+          onColor={colors.secundary}
+        />
+      </Content>
+    </Container>
+  );
 }

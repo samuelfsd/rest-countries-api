@@ -1,5 +1,3 @@
-import './global/GlobalStyles.scss';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 

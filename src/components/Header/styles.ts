@@ -16,5 +16,6 @@ export const Content = styled.div`
   h3 {
     font-size: 1.5rem;
     font-weight: bold;
+    color: var(--white);
   }
 `;

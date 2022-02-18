@@ -9,6 +9,7 @@ export const Container = styled.main`
 
 export const CountryCard = styled.div`
   min-height: 400px;
+  background: ${(props) => props.theme.colors.primarys};
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   width: 300px;
   border-radius: 5px;
@@ -35,5 +36,11 @@ export const CountryInfo = styled.div`
   h4 {
     padding: 8px 0;
     letter-spacing: 1px;
+    color: ${(props) => props.theme.colors.text};
+  }
+
+  p {
+    letter-spacing: 1px;
+    color: ${(props) => props.theme.colors.text};
   }
 `;

@@ -23,7 +23,7 @@ export function Header(props: HeaderProps) {
           height={10}
           width={40}
           handleDiameter={20}
-          onColor={colors.secundary}
+          onColor={colors.text}
         />
       </Content>
     </Container>

@@ -1,5 +1,6 @@
+import { Countries } from 'components/Countries';
+import { Filter } from 'components/Filter';
 import { Header } from 'components/Header';
-import { Main } from 'components/Main';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { usePersistedState } from 'utils/usePersistedState';
@@ -19,7 +20,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Header toggleTheme={toggleTheme} />
-      <Main />
+      <Filter />
+      <Countries />
     </ThemeProvider>
   );
 }

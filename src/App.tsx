@@ -1,13 +1,13 @@
-import { Countries } from 'components/Countries';
-import { Filter } from 'components/Filter';
 import { Header } from 'components/Header';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { usePersistedState } from 'utils/usePersistedState';
 
-import GlobalStyles from '././globalStyles/global';
+import GlobalStyles from './globalStyles/global';
 import dark from './globalStyles/themes/dark';
 import light from './globalStyles/themes/light';
+import Routes from './routes';
 
 function App() {
   const [theme, setTheme] = usePersistedState('theme', light);
@@ -15,13 +15,13 @@ function App() {
   function toggleTheme() {
     setTheme(theme.title === 'light' ? dark : light);
   }
-
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
       <Header toggleTheme={toggleTheme} />
-      <Filter />
-      <Countries />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+      <GlobalStyles />
     </ThemeProvider>
   );
 }

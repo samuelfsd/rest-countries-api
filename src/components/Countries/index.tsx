@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 import { Container, CountryCard, CountryImage, CountryInfo } from './styles';
@@ -27,22 +28,24 @@ export function Countries() {
     <Container>
       {countries.map((country) => (
         <CountryCard key={country.name.official}>
-          <CountryImage>
-            <img src={country.flags.png} alt={country.name.official} />
-          </CountryImage>
-          <CountryInfo>
-            <h4>{country.name.official}</h4>
-            <p>
-              <strong>Population: </strong> {country.population}
-            </p>
-            <p>
-              <strong>Region: </strong>
-              {country.region}
-            </p>
-            <p>
-              <strong>Capital:</strong> {country.capital}
-            </p>
-          </CountryInfo>
+          <Link to={`/countries/${country.name.official}`}>
+            <CountryImage>
+              <img src={country.flags.png} alt={country.name.official} />
+            </CountryImage>
+            <CountryInfo>
+              <h4>{country.name.official}</h4>
+              <p>
+                <strong>Population: </strong> {country.population}
+              </p>
+              <p>
+                <strong>Region: </strong>
+                {country.region}
+              </p>
+              <p>
+                <strong>Capital:</strong> {country.capital}
+              </p>
+            </CountryInfo>
+          </Link>
         </CountryCard>
       ))}
     </Container>

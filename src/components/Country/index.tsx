@@ -1,10 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoArrowBackSharp } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
+import api from '../../services/api';
 import { Container, Content, CountryInfo } from './styles';
+interface CountryProps {
+  name: string;
+  nativeName: string;
+  population: number;
+  region: string;
+  subregion: string;
+  capital: string;
+  topLevelDomain: string;
+  currencies: [
+    {
+      name: string;
+    },
+  ];
+  languages: [
+    {
+      name: string;
+    },
+  ];
+  flag: string;
+  borders: string[];
+}
 
 export function Country() {
+  const [country, setCountry] = useState<CountryProps | null>(null);
+
+  const { name } = useParams();
+
+  useEffect(() => {
+    async function getData() {
+      const { data } = await api.get(`name/${name}`);
+      setCountry(() => data[0]);
+    }
+    getData();
+  }, []);
+
+  useEffect(() => {
+    console.log(country);
+  }, [country]);
+
   return (
     <Container>
       <Link to="/">
@@ -15,45 +53,55 @@ export function Country() {
       </Link>
       <Content>
         <div className="image-content">
-          <img src="https://flagcdn.com/w320/de.png" alt="Germany" />
+          <img src={country?.flag} alt={country?.nativeName} />
         </div>
         <CountryInfo>
           <div>
-            <h3>Alemanha</h3>
+            <h3>{country?.name}</h3>
             <p>
-              <span>Native Name:</span> dasfdasf
+              <span>Native Name:</span> {country?.nativeName}
             </p>
             <p>
-              <span>Population: </span> dasfdasf
+              <span>Population: </span> {country?.population}
             </p>
             <p>
-              <span>Region:</span> dasfdasf
+              <span>Region:</span> {country?.region}
             </p>
             <p>
-              <span>Sub Region</span> dasfdasf
+              <span>Sub Region: </span> {country?.subregion}
             </p>
           </div>
           <div className="right-col">
             <p>
-              <span>Top Level Domanin: </span> dasfdasf
+              <span>Top Level Domain: </span> {country?.topLevelDomain}
             </p>
             <p>
-              <span>Currencies: </span> dasfdasf
+              {country && country.currencies && (
+                <>
+                  <span>Currencies: </span> {country?.currencies[0].name}
+                </>
+              )}
             </p>
             <p>
-              <span>Lenguages: </span> dasfdasf
+              <span>Languages: </span>
+              {country &&
+                country.languages &&
+                country?.languages.map((language) => `${language.name} `)}
             </p>
           </div>
         </CountryInfo>
       </Content>
       <div className="border-content">
         <h4>Border Countries: </h4>
+
         <div className="borders">
-          <p>
-            <span>France</span>
-            <span>Germany</span>
-            <span>Netherlands</span>
-          </p>
+          {country && country.borders && (
+            <p>
+              {country?.borders.map((border) => {
+                return <span key={`${border}`}>{border}</span>;
+              })}
+            </p>
+          )}
         </div>
       </div>
     </Container>

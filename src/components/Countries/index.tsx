@@ -3,23 +3,19 @@ import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 import { Container, CountryCard, CountryImage, CountryInfo } from './styles';
-interface Countrie {
-  name: {
-    official: string;
-  };
+interface Country {
+  name: string;
+  capital: string;
   population: number;
   region: string;
-  capital: {
-    0: string;
-  };
+  numericCode: string;
   flags: {
     png: string;
-    svg: string;
   };
 }
 
 export function Countries() {
-  const [countries, setCountries] = useState<Countrie[]>([]);
+  const [countries, setCountries] = useState<Country[]>([]);
 
   useEffect(() => {
     api.get('/all').then((response) => setCountries(response.data));
@@ -27,13 +23,13 @@ export function Countries() {
   return (
     <Container>
       {countries.map((country) => (
-        <CountryCard key={country.name.official}>
-          <Link to={`/countries/${country.name.official}`}>
+        <CountryCard key={country.name}>
+          <Link to={`/countries/${country.name}`}>
             <CountryImage>
-              <img src={country.flags.png} alt={country.name.official} />
+              <img src={country.flags.png} alt={country.name} />
             </CountryImage>
             <CountryInfo>
-              <h4>{country.name.official}</h4>
+              <h4>{country.name}</h4>
               <p>
                 <strong>Population: </strong> {country.population}
               </p>

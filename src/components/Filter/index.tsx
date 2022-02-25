@@ -1,20 +1,27 @@
 import React from 'react';
 
 import { Container, Form } from './styles';
-
-export function Filter() {
+interface InputProps {
+  value: string;
+  setInputText: (event: string) => void; //disabled eslint no-unused-vars
+}
+export function Filter({ value, setInputText }: InputProps) {
   return (
     <Container>
       <Form>
-        <input placeholder="Search for a country..." />
+        <input
+          type="text"
+          placeholder="Search for a country..."
+          value={value}
+          onChange={(event) => setInputText(event.target.value)}
+        />
       </Form>
 
       <div>
-        <select name="select">
-          <option value="value1">Brasil</option>
-          <option value="value2">Argentina</option>
-          <option value="value3">Inglaterra</option>
-          <option value="value4">Dinamarca</option>
+        <select>
+          <option value="Filter by Region" disabled selected>
+            Filter by Region
+          </option>
         </select>
       </div>
     </Container>

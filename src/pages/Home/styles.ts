@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const Container = styled.main`
+export const Content = styled.main`
   padding: 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 3fr));
   grid-gap: 30px;
 `;
 

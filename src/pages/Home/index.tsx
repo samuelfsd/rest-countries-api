@@ -22,15 +22,18 @@ export function Home() {
   useEffect(() => {
     api.get('/all').then((response) => setCountries(response.data));
   }, []);
-  const lowerInputText = inputText.toLowerCase();
 
-  const filteredCountries = countries.filter((country) =>
-    country.name.toLowerCase().includes(lowerInputText),
+  const lowerSearch = inputText.toLowerCase();
+
+  const filteredCountries = countries.filter(
+    (country) =>
+      country.name.toLowerCase().includes(lowerSearch) ||
+      country.region.toLowerCase().includes(lowerSearch),
   );
 
   return (
     <>
-      <Filter value={inputText} setInputText={setInputText} />
+      <Filter value={inputText} search={setInputText} />
       <Content>
         {filteredCountries.map((country) => (
           <CountryCard key={country.name}>
